@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TestProject.Mono
+namespace TestProject.Mono.Player
 {
     public class PlayerInputReader : MonoBehaviour
     {
@@ -14,3 +14,4 @@ namespace TestProject.Mono
         }
     }
 }
+

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TestProject.Mono
+namespace TestProject.Mono.UI
 {
-    public class SaveZoneInputReader : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class TouchZoneInputReader : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         private Vector2 _direction;
         private PointerEventData _pointerEventData;
