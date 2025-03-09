@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace TestProject.Mono
@@ -13,7 +12,7 @@ namespace TestProject.Mono
         [SerializeField] private Camera _camera;
         [SerializeField] private SaveZoneInputReader _saveZoneInput;
 
-        private float _cameraRotation;
+        private Vector3 _cameraRotation;
         private CharacterController _characterController;
 
         private void Awake()
@@ -21,35 +20,25 @@ namespace TestProject.Mono
             _characterController = GetComponent<CharacterController>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             RotateCharacter();
-            RotateCamera();
-            
-            ClampCameraAngle();
+            RotateCamera();            
         }
 
         private void RotateCharacter()
         {
-            Vector3 rotationX = Vector3.right * _saveZoneInput.Direction * _sensitivity;
+            Vector3 direction = Vector3.up * _saveZoneInput.Direction.x * _sensitivity;
 
-            _characterController.transform.Rotate(rotationX * Time.fixedDeltaTime);
+            _characterController.transform.Rotate(direction * Time.deltaTime);
         }
 
         private void RotateCamera()
         {
-            Vector3 rotationY = Vector3.up * _saveZoneInput.Direction * _sensitivity;
+            _cameraRotation.x -= _saveZoneInput.Direction.y * _sensitivity * Time.deltaTime;
+            _cameraRotation.x = Mathf.Clamp(_cameraRotation.x, _minAngle, _maxAngle);
 
-            _camera.transform.Rotate(rotationY * Time.fixedDeltaTime);
-        }
-        
-        private void ClampCameraAngle()
-        {
-            Vector3 clamped = _camera.transform.rotation.eulerAngles;
-            
-            clamped.x = Mathf.Clamp(clamped.x, _minAngle, _maxAngle);
-            
-            _camera.transform.rotation = Quaternion.Euler(clamped);
+            _camera.transform.localRotation = Quaternion.Euler(_cameraRotation);
         }
     }
 }

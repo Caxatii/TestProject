@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 namespace TestProject.Mono
 {
@@ -15,7 +14,6 @@ namespace TestProject.Mono
         private void Update()
         {
             _direction = _pointerEventData?.delta ?? Vector2.zero;
-            Debug.Log(Direction);
         }
 
         public void OnPointerDown(PointerEventData eventData)
