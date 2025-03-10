@@ -50,7 +50,7 @@ public partial class @MainActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f24ba7a6-44bf-4243-9cff-48e3351fa1d5"",
-                    ""path"": ""<Touchscreen>/Press"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Mobile"",

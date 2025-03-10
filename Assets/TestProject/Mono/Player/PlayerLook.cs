@@ -1,5 +1,6 @@
 using TestProject.Mono.UI;
 using UnityEngine;
+using Zenject;
 
 namespace TestProject.Mono.Player
 {
@@ -10,16 +11,11 @@ namespace TestProject.Mono.Player
         [SerializeField] private float _minAngle;
         [SerializeField] private float _maxAngle;
         
-        [SerializeField] private Camera _camera;
-        [SerializeField] private TouchZoneInputReader _touchZoneInput;
+        [Inject] private FirstPersonCamera _camera;
+        [Inject] private TouchZoneInputReader _touchZoneInput;
+        [Inject] private CharacterController _characterController;
 
         private Vector3 _cameraRotation;
-        private CharacterController _characterController;
-
-        private void Awake()
-        {
-            _characterController = GetComponent<CharacterController>();
-        }
 
         private void Update()
         {

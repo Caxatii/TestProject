@@ -1,14 +1,17 @@
 using System;
+using TestProject.Mono.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace TestProject.Mono.Interactions
 {
     public class TouchRaycaster : MonoBehaviour
     {
         [SerializeField] private LayerMask _layerMask;
-        [SerializeField] private Camera _camera;
-
+        
+        [Inject] private FirstPersonCamera _camera;
+        
         private MainActions _mainActions;
 
         public event Action<RaycastHit> Raycasted;
@@ -30,14 +33,9 @@ namespace TestProject.Mono.Interactions
             _mainActions.Touchscreen.SingleTouch.performed -= OnTouched;
         }
 
-        private void Update()
-        {
-            //Debug.Log(_a.phase);
-        }
-
         private void OnTouched(InputAction.CallbackContext context)
         {
-            Ray ray = _camera.ScreenPointToRay(_mainActions.Touchscreen.TouchPosition.ReadValue<Vector2>());
+            Ray ray = _camera.Camera.ScreenPointToRay(_mainActions.Touchscreen.TouchPosition.ReadValue<Vector2>());
             if(Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, _layerMask))
                 Raycasted?.Invoke(hit);
         }

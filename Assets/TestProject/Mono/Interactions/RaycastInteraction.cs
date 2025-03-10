@@ -3,28 +3,19 @@ using UnityEngine;
 namespace TestProject.Mono.Interactions
 {
     [RequireComponent(typeof(TouchRaycaster))]
-    public class RaycastInteraction : MonoBehaviour
+    public class RaycastInteraction : RaycastComponent
     {
-        [SerializeField] private float _maxDistance;
-
-        private TouchRaycaster _raycaster;
-
-        private void Awake()
-        {
-            _raycaster = GetComponent<TouchRaycaster>();
-        }
-
         private void OnEnable()
         {
-            _raycaster.Raycasted += OnRaycasted;
+            TouchRaycaster.Raycasted += OnRaycast;
         }
 
         private void OnDisable()
         {
-            _raycaster.Raycasted -= OnRaycasted;
+            TouchRaycaster.Raycasted -= OnRaycast;
         }
 
-        private void OnRaycasted(RaycastHit hit)
+        private void OnRaycast(RaycastHit hit)
         {
             if(hit.distance > _maxDistance || hit.collider == null) 
                 return;

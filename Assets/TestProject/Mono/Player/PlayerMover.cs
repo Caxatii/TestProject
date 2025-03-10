@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace TestProject.Mono.Player
 {
@@ -7,14 +8,8 @@ namespace TestProject.Mono.Player
     {
         [SerializeField] private float _speed;
     
-        private CharacterController _characterController;
-        private PlayerInputReader _playerInputReader;
-    
-        private void Awake()
-        {
-            _characterController = GetComponent<CharacterController>();
-            _playerInputReader = GetComponent<PlayerInputReader>();
-        }
+        [Inject] private CharacterController _characterController;
+        [Inject] private PlayerInputReader _playerInputReader;
 
         private void FixedUpdate()
         {
